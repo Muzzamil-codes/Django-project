@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block start %}
+
+{% if request.user.is_authenticated %}
+
+
+<title>User panel | Post blog</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" src="/media/css/add_blog.css">
+<link rel="stylesheet" src="/media/css/style    .css">
+
+<div class="container mt-5">
+    <form method="post" class="mt-5 pt-5 mb-5 pb-5"
+          enctype="multipart/form-data">{% csrf_token %}
+        <div class="row">
+            <div class="col-md-12">
+                <label>Enter blog title</label>
+                <input type="text" class="form-control" placeholder="Enter title" name="title">
+            <br>
+            </div>
+
+            <div class="col-md-12">
+                {{form.media}}
+                {{form.as_p}}
+            </div>
+
+            <div class="col-md-12">
+                <label>Import image for the Thumbnail</label>
+                <br>
+                <input type="file" name="image" class="form-control" >
+            </div>
+
+            <div>
+                <label>Select the Genre for this blog</label>
+                <div class="dropdown">
+                    <label class="col-12 col-sm-2">Choose your genre</label>
+                    <input type="radio" class="form-control radio-inline col-sm-1 mt-1" name="radoption" value="Tech">Tech
+                    <input type="radio" class="form-control radio-inline col-sm-1 mt-1" name="radoption" value="News">News
+                    <input type="radio" class="form-control radio-inline col-sm-1 mt-1" name="radoption" value="Gaming">Gaming
+                    <input type="radio" class="form-control radio-inline col-sm-1 mt-1" name="radoption" value="Literature">Literature
+                    <input type="radio" class="form-control radio-inline col-sm-1 mt-1" name="radoption" value="History">History
+                </div>
+            </div>          
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-4">Create Blog</button>
+
+    </form>
+
+</div>
+{% else %}
+<title>You are not logged in!</title>
+<br>
+<h1>You are not logged in to this website</h1>
+{% endif %}
+
+{% endblock %}

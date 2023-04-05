@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block start %}
+
+{% if request.user.is_authenticated %}
+
+<title>User panel | Post blog</title>
+
+<div class="container mt-5">
+    <form method="post" class="mt-5 pt-5 mb-5 pb-5"
+          enctype="multipart/form-data">{% csrf_token %}
+        <div class="row">
+            <div class="col-md-12">
+                <label>Enter blog title</label>
+                <input type="text" value="{{blog_obj.title}}" class="form-control" placeholder="Enter title" name="title">
+            <br>
+            </div>
+
+            <div class="col-md-12">
+                {{form.media}}
+                {{form.as_p}}
+            </div>
+
+            <div class="col-md-12">
+                <label>Import image for the Thumbnail</label>
+                <br>
+                <input type="file" name="image" class="form-control" >
+            </div>
+
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-4">Create Blog</button>
+
+    </form>
+
+</div>
+{% else %}
+<title>You are not logged in!</title>
+<br>
+<h1>You are not logged in to this website</h1>
+{% endif %}
